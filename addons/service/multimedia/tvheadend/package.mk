@@ -17,12 +17,12 @@
 ################################################################################
 
 PKG_NAME="tvheadend"
-PKG_VERSION="4.0.3"
+PKG_VERSION="4.1.361"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="http://www.tvheadend.org"
-PKG_URL="$DISTRO_SRC/${PKG_NAME}-${PKG_VERSION}.tar.gz"
+PKG_SITE="https://github.com/laurimyllari/tvheadend/tree/master-atsc-epg"
+PKG_URL="https://github.com/laurimyllari/tvheadend/archive/master-atsc-epg.zip"
 PKG_DEPENDS_TARGET="toolchain libressl curl"
 PKG_PRIORITY="optional"
 PKG_SECTION="service/multimedia"
@@ -38,6 +38,10 @@ if [ "$TARGET_ARCH" == "arm" ] ; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libdvbcsa"
 fi
 
+unpack() {
+  unzip $SOURCES/$PKG_NAME/master-atsc-epg.zip -d $BUILD/$PKG_NAME
+  mv $BUILD/$PKG_NAME/$PKG_NAME-master-atsc-epg $BUILD/$PKG_NAME-$PKG_VERSION
+}
 
 pre_build_target() {
   mkdir -p $PKG_BUILD/.$TARGET_NAME
